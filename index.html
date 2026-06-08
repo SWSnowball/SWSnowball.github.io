@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="styles/style.css"></link>
+	<link rel="icon" type="image/png" href="images/swsnowball.j"></link>
+	<title>_SnowShelter_</title>
+</head>
+
+<body>
+	<div class="main-intro">
+		<img src="images/swsnowball.jpg" title="SW_Snowball_" id="swsnowball_img"></img>
+		<h1 id="and"> & </h1>
+		<img src="images/aliak_head.png" title="阿利亚克（点击查看全身照！）" id="aliak_img"></img>
+		<h1 class="swsnowball">SW_Snowball_</h1>
+		<h2 class="swsnowball">孤独与自由，存在与精神</h2>
+		<h3 class="swsnowball">于数字流河中驰骋 于渺远乐海间舞踱 于文学原野上奔腾</h3>
+		<h3 class="swsnowball">草木与沙石之息 终于龙翼比及之处永恒</h3>
+	</div>
+	
+		<!-- 模态框：点击头像时展示全身照 -->
+	<div id="modal" class="modal">
+		<span class="close-btn">&times;</span>
+		<img class="modal-content" id="fullbody-img">
+		<div class="modal-caption">阿利亚克 · 全身照</div>
+	</div>
+	
+	    <!-- 原有的音频元素（保持不变） -->
+    <audio id="bgm" loop preload="auto">
+        <source src="music/oib.mp3" type="audio/mpeg">
+        您的浏览器太老了...放不了BGM哦...QWQ
+    </audio>
+
+    <div class="music-player" id="musicPlayer">
+        <button id="playPauseBtn" class="play-btn" aria-label="播放音乐" title="播放SW给阿利亚克原创的设定曲《Observer In Blizzard》"></button>
+    </div>
+	
+	<div class="hobbies">
+	
+	</div>
+
+    <script>
+        (function() {
+            const audio = document.getElementById('bgm');
+            const btn = document.getElementById('playPauseBtn');
+            let isPlaying = false;
+
+            // 按钮点击：播放/暂停
+            btn.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    btn.classList.remove('playing');
+                    btn.classList.add('paused');
+                } else {
+                    // 播放音乐
+                    audio.play().then(() => {
+                        btn.classList.remove('paused');
+                        btn.classList.add('playing');
+                        isPlaying = true;
+                    }).catch(error => {
+                        console.warn('播放失败，请点击允许自动播放:', error);
+                        // 可提示用户，但不影响页面美观
+                        btn.classList.add('paused');
+                    });
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // 当音乐自然结束（loop 为 true 时会自动重播，但状态会重置）
+            audio.addEventListener('ended', function() {
+                // 如果开启了 loop，不会进入这里；但为了安全，重置按钮样式
+                if (!audio.loop) {
+                    isPlaying = false;
+                    btn.classList.remove('playing');
+                    btn.classList.add('paused');
+                }
+            });
+
+            // 初始化按钮状态（暂停样式）
+            btn.classList.add('paused');
+        })();
+		
+		(function() {
+			// 获取元素
+			const modal = document.getElementById('modal');
+			const modalImg = document.getElementById('fullbody-img');
+			const closeBtn = document.querySelector('.close-btn');
+			const aliakImg = document.getElementById('aliak_img');
+
+			// 全身照路径（请确保 images/aliak.png 存在）
+			const fullBodySrc = 'images/aliak.png';
+
+			// 点击头像：打开模态框并显示全身照
+			aliakImg.addEventListener('click', function(e) {
+				e.stopPropagation();  // 防止事件冒泡到 body（避免意外关闭）
+				modal.style.display = 'flex';
+				modalImg.src = fullBodySrc;
+			});
+
+			// 点击关闭按钮关闭模态框
+			if (closeBtn) {
+				closeBtn.addEventListener('click', function() {
+					modal.style.display = 'none';
+					modalImg.src = ''; // 可选：清除图片源
+				});
+			}
+
+			// 点击模态框背景（自身）也关闭
+			modal.addEventListener('click', function(e) {
+				if (e.target === modal) {
+					modal.style.display = 'none';
+					modalImg.src = '';
+				}
+			});
+
+			// 按 ESC 键关闭模态框
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape' && modal.style.display === 'flex') {
+					modal.style.display = 'none';
+					modalImg.src = '';
+				}
+			});
+		})();
+    </script>
+	
+	<footer>
+		<p>© SW_Snowball_</p>
+	</footer>
+
+</body>
+
+</html>

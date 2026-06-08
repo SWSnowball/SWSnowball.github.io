@@ -1,0 +1,237 @@
+/* SW:加注释的就不是我写的嘿嘿嘿QwQ（不包括所有） */
+
+body {
+	background: linear-gradient(to right, white, gray);
+}
+
+/* 让 .main-intro 使用弹性布局，子项水平居中并允许换行 */
+.main-intro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 覆盖图片原有的块级+自动边距，改为水平排列时的边距 */
+
+#swsnowball_img {
+			max-width: 350px;
+			width: 200px;
+            height: auto;
+            display: inline-block;   /* 或保留 block 但去掉 auto 边距 */
+			margin: 10px 15px;       /* 左右间距一致，清除之前垂直边距影响 */
+			transition: width 0.6s ease;
+			animation: opacity_anim 1s;
+}
+
+#aliak_img {
+			max-width: 350px;
+			width: 200px;
+            height: auto;
+            display: inline-block;   /* 或保留 block 但去掉 auto 边距 */
+			margin: 10px 15px;       /* 左右间距一致，清除之前垂直边距影响 */
+			transition: width 0.6s ease;
+			animation: opacity_anim 1s;
+}
+
+#swsnowball_img:hover {
+	width: 350px;
+}
+
+#aliak_img:hover {
+	/* 这里要把阿利亚克的头照换成全身照但我不知道咋整qwq */
+	width: 350px;
+}
+
+/* & 符号与图片的水平对齐 */
+#and {
+    margin: 0 10px;
+    font-size: 2rem;         /* 适当放大，与图片视觉协调 */
+    line-height: 1;
+	color: #dfdfdf;
+}
+
+h1.swsnowball {
+	width: 100%;
+    text-align: center;
+    margin: 0.5em 0;         /* 微调垂直间距，可选 */
+	color: linear-gradient(#dfdfdf,#ffffff);
+}
+
+h2.swsnowball {
+	width: 100%;
+    text-align: center;
+    margin: 0.5em 0;         /* 微调垂直间距，可选 */
+	text-decoration: underline;
+}
+
+h3.swsnowball {
+	width: 100%;
+    text-align: center;
+    margin: 0.5em 0;         /* 微调垂直间距，可选 */
+	font-weight: lighter;
+}
+
+@keyframes opacity_anim {
+	0% {
+		opacity: 0.0;
+	}
+	25% {
+		opacity: 0.25;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	75% {
+		opacity: 0.75;
+	}
+	100% {
+		opacity: 1.0;
+		/*position: relative 1000px left;*/
+	}
+}
+
+/* 音乐播放器样式 */
+.music-player {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    width: 56px;
+    height: 56px;
+    background: rgba(30, 30, 40, 0.8);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.music-player:hover {
+    transform: scale(1.05);
+}
+
+.play-btn {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* 播放按钮样式 */
+.play-btn.paused::before {
+    content: "▶";
+    font-size: 26px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    margin-left: 4px; /* 视觉居中 */
+}
+
+.play-btn.playing::before {
+    content: "⏸";
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    line-height: 1;
+}
+
+/* 移动端触摸优化 */
+@media (max-width: 768px) {
+    .music-player {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+    .play-btn.paused::before {
+        font-size: 22px;
+    }
+    .play-btn.playing::before {
+        font-size: 24px;
+    }
+}
+
+footer p {
+	text-decoration: underline #b3badb;
+	font-weight: lighter;
+	text-align: center;
+	margin: 300px auto;
+}
+
+/* 模态框背景层 */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+/* 弹窗中的图片 */
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    animation: zoomIn 0.3s ease;
+}
+
+/* 图片下方的说明文字 */
+.modal-caption {
+    margin: 15px auto;
+    text-align: center;
+    color: #eee;
+    font-size: 1.1rem;
+    font-family: system-ui, 'Segoe UI', sans-serif;
+	animation: zoomIn 0.3s ease;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 1001;
+	animation: zoomIn 0.3s ease;
+}
+.close-btn:hover {
+    color: #bbb;
+    transform: scale(1.1);
+}
+
+/* 轻量缩放动画 */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
