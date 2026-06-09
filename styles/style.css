@@ -21,7 +21,7 @@ body {
             display: inline-block;   /* 或保留 block 但去掉 auto 边距 */
 			margin: 10px 15px;       /* 左右间距一致，清除之前垂直边距影响 */
 			transition: width 0.6s ease;
-			animation: opacity_anim 1s;
+			animation: slideInLeft 1.2s ease;
 }
 
 #aliak_img {
@@ -31,7 +31,7 @@ body {
             display: inline-block;   /* 或保留 block 但去掉 auto 边距 */
 			margin: 10px 15px;       /* 左右间距一致，清除之前垂直边距影响 */
 			transition: width 0.6s ease;
-			animation: opacity_anim 1s;
+			animation: slideInRight 1.2s ease;
 }
 
 #swsnowball_img:hover {
@@ -39,7 +39,6 @@ body {
 }
 
 #aliak_img:hover {
-	/* 这里要把阿利亚克的头照换成全身照但我不知道咋整qwq */
 	width: 350px;
 }
 
@@ -56,6 +55,7 @@ h1.swsnowball {
     text-align: center;
     margin: 0.5em 0;         /* 微调垂直间距，可选 */
 	color: linear-gradient(#dfdfdf,#ffffff);
+	animation: slideInUp 1.0s ease;
 }
 
 h2.swsnowball {
@@ -63,6 +63,7 @@ h2.swsnowball {
     text-align: center;
     margin: 0.5em 0;         /* 微调垂直间距，可选 */
 	text-decoration: underline;
+	animation: slideInUp 1.5s ease;
 }
 
 h3.swsnowball {
@@ -70,6 +71,7 @@ h3.swsnowball {
     text-align: center;
     margin: 0.5em 0;         /* 微调垂直间距，可选 */
 	font-weight: lighter;
+	animation: slideInUp 2.0s ease;
 }
 
 @keyframes opacity_anim {
@@ -89,6 +91,41 @@ h3.swsnowball {
 		opacity: 1.0;
 		/*position: relative 1000px left;*/
 	}
+}
+
+/* 左侧滑入动画（用于 SW_Snowball_ 照片） */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 右侧滑入动画（用于阿利亚克照片） */
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+	0% {
+        opacity: 0;
+        transform: translateY(500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 音乐播放器样式 */
